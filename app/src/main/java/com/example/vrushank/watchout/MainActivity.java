@@ -2,18 +2,30 @@ package com.example.vrushank.watchout;
 
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Locale;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +33,12 @@ public class MainActivity extends AppCompatActivity {
      Button button;
      String str;
      TextToSpeech t1;
+    RequestQueue queue;
+    TextView mTextView;
+    int wp;
+    int visited[] = new int[100];
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +46,11 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //HttpClient httpClient = new DefaultHttpClient();
+        queue = Volley.newRequestQueue(this);
+
+
+        mTextView = (TextView)findViewById(R.id.textView);
         button = (Button)findViewById(R.id.button);
         editText = (EditText)findViewById(R.id.edittext);
 
@@ -48,8 +71,87 @@ public class MainActivity extends AppCompatActivity {
                 t1.speak(str, TextToSpeech.QUEUE_FLUSH, null);
             }
         });
+
+        sendRequest();
     }
 
+    public static String replaceAllChar(String s, String f, String r){
+        String temp = s.replace(f ,r);
+        return temp;
+    }
+    public void sendRequest(){
+
+        final String URL= "https://maps.googleapis.com/maps/api/directions/json?origin=13.3516,74.7932&destination=13.3532,74.7908&key=AIzaSyCLxTgtFo_WM1SQqkJHPGP8-pAOyTLvAKs";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the first 500 characters of the response string.
+                        JSONObject jsonObject = null,jsonObject2=null;
+                        try {
+                            jsonObject = new JSONObject(response);
+//                            mTextView.setText("Response is: "+ response);
+                            //System.out.println(jsonObject);
+                            //mTextView.setText(jsonObject.names());
+                            Log.d("test",jsonObject.names().toString());
+                            JSONArray jsonArray = jsonObject.getJSONArray("routes");
+
+                            JSONArray legs = jsonArray.
+                                    getJSONObject(0).getJSONArray("legs");
+                            Coordinates[] coordinates = new Coordinates[1000];
+                            int k=0;
+                            for(int i=0;i<legs.length();i++)
+                            {
+
+                                JSONArray steps = legs.getJSONObject(i).getJSONArray("steps");
+                                for(int j=0;j<steps.length();j++){
+                                    JSONObject lel = steps.getJSONObject(j);
+                                    //Log.d("sfsffsa", ""+lel.get("end_location") +"\n" + lel.get("html_instructions")+"\n");
+                                    String str= lel.get("html_instructions")+"\n";
+                                    //String str1 = replaceAllChar(str,"<b>"," ");
+                                    //String str2= replaceAllChar(str1,"</b>"," ");
+                                    //Log.d("sdadasd",str2);
+                                    JSONObject lel2 = lel.getJSONObject("end_location");
+                                    String str2 = str.replaceAll("\\<.*?\\>","");
+                                    double lat1 = (double)lel2.get("lat");
+                                    double longi = (double)lel2.get("lng");
+                                    coordinates[k] = new Coordinates(lat1,longi,str2,k);
+                                    k++;
+
+
+                                }
+                            }
+                            //Log.d("k:",k+"");
+                            for(int i=0;i<k;i++){
+                                Log.d("somedsdf","Lat: " +  coordinates[i].lat+" Longi: " + coordinates[i].longi + " HTML: " + coordinates[i].html_dir+"\n");
+                            }
+
+
+                            //mTextView.setText(jsonArray[0]);
+                            //jsonObject2 = new JSONObject(jsonArray.getJSONArray(0));
+                            //JSONArray jsanArray2 = jsonArray[0].getJSONArray()
+
+
+
+                            //mTextView.setText("Response is: "+ jsonObject.get("geocoded_waypoints"));
+                        } catch (JSONException e) {
+                           e.printStackTrace();
+                        }
+                        }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                mTextView.setText("That didn't work!");
+            }
+        });
+// Add the request to the RequestQueue.
+        queue.add(stringRequest);
+        sendLocalRequest();
+    }
+    public void sendLocalRequest(){
+
+    }
     public void onDestroy() {
         // Don't forget to shutdown tts!
         if (t1 != null) {
