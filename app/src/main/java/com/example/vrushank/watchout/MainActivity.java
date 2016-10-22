@@ -1,6 +1,7 @@
 package com.example.vrushank.watchout;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -35,8 +36,12 @@ public class MainActivity extends AppCompatActivity {
      TextToSpeech t1;
     RequestQueue queue;
     TextView mTextView;
-    int wp;
+    RequestQueue queue2;
+    CountDownTimer timer;
+    int wp=0,k;
     int visited[] = new int[100];
+    Coordinates[] coordinates = new Coordinates[1000];
+    GPSTracker gps;
 
 
     @Override
@@ -99,8 +104,8 @@ public class MainActivity extends AppCompatActivity {
 
                             JSONArray legs = jsonArray.
                                     getJSONObject(0).getJSONArray("legs");
-                            Coordinates[] coordinates = new Coordinates[1000];
-                            int k=0;
+
+                            k=0;
                             for(int i=0;i<legs.length();i++)
                             {
 
@@ -147,11 +152,57 @@ public class MainActivity extends AppCompatActivity {
         });
 // Add the request to the RequestQueue.
         queue.add(stringRequest);
-        sendLocalRequest();
+        //sendLocalRequest();
+
+        timer = new CountDownTimer(5000, 20) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                try{
+                    sendLocalRequest();
+                }catch(Exception e){
+                    Log.e("Error", "Error: " + e.toString());
+                }
+            }
+        }.start();
     }
     public void sendLocalRequest(){
 
+        gps = new GPSTracker(MainActivity.this);
+        if(gps.canGetLocation()) {
+
+            double latitude = gps.getLatitude();
+            double longitude = gps.getLongitude();
+            //wp=0;
+            double res = coordinates[wp].distance(coordinates[wp].lat,latitude,coordinates[wp].longi,longitude);
+            if(res <= 0.01){
+                visited[wp]=1;
+                wp++;
+                mTextView.setText("Reache Waypoint:" + wp);
+                t1.speak(coordinates[wp].html_dir,TextToSpeech.QUEUE_FLUSH, null);
+            }
+            else
+            {
+                mTextView.setText("Changing:"+latitude+"\n"+longitude);
+            }
+
+            // \n is for new line
+
+            //Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+        } else {
+            // Can't get location.
+            // GPS or network is not enabled.
+            // Ask user to enable GPS/network in settings.
+            gps.showSettingsAlert();
+        }
+        timer.start();
     }
+
     public void onDestroy() {
         // Don't forget to shutdown tts!
         if (t1 != null) {

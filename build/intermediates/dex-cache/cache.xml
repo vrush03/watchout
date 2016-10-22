@@ -3,15 +3,6 @@
 
     <item
         is-multidex="true"
-        jar="/home/vrushank/watchout/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
-        <dex dex="/home/vrushank/watchout/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.4.0_6b2cc6fc14264db5b02721538f73aa9c76bf13ce/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/home/vrushank/watchout/app/build/intermediates/exploded-aar/com.android.support/design/23.4.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
@@ -27,15 +18,6 @@
         revision="25.0.0"
         sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
         <dex dex="/home/vrushank/watchout/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.4.0_754379e9019852256614b2f91ad051f780a04e5a/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/vrushank/watchout/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
-        <dex dex="/home/vrushank/watchout/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-23.4.0_8e59fa4205f654c166d0ff45151e1a8fce3d8847/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -57,11 +39,47 @@
     </item>
     <item
         is-multidex="true"
+        jar="/home/vrushank/.gradle/caches/modules-2/files-2.1/com.mcxiaoke.volley/library/1.0.19/a8f23f65fc1e522ee4a1a697ee569901a46741fa/library-1.0.19.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="a8f23f65fc1e522ee4a1a697ee569901a46741fa">
+        <dex dex="/home/vrushank/watchout/app/build/intermediates/transforms/dex/debug/folders/1000/10/library-1.0.19_6a8b60d4459bfa09728b8b80dddf0c7af43e4da1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/vrushank/watchout/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="/home/vrushank/watchout/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-23.4.0_13f910c653b8820fea84f5db9f95db0c936f4061/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/vrushank/watchout/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="/home/vrushank/watchout/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.4.0_6b2cc6fc14264db5b02721538f73aa9c76bf13ce/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/vrushank/watchout/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="/home/vrushank/watchout/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-23.4.0_8e59fa4205f654c166d0ff45151e1a8fce3d8847/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/home/vrushank/watchout/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="1270c4abdb9dc1fa776c86bfe120b1ea18ddac0b">
+        sha1="2db0aff2539248a9748a7ed6822f9bc0f5172e2b">
         <dex dex="/home/vrushank/watchout/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_b5102ed0eadb1ee181e0afbdda66c9d8af2a627e/classes.dex" />
     </item>
     <item
@@ -79,17 +97,8 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="f8961521a8eefb9ae999c6603b98e305b6402513">
+        sha1="66de6c9f23394f86b705e916135933cd7275ed45">
         <dex dex="/home/vrushank/watchout/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_466eb8f5fc918e1154dcf0f6cdc62b432e6e705a/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/home/vrushank/watchout/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
-        <dex dex="/home/vrushank/watchout/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-23.4.0_13f910c653b8820fea84f5db9f95db0c936f4061/classes.dex" />
     </item>
 
 </items>
